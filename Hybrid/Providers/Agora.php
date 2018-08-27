@@ -43,7 +43,7 @@ class Hybrid_Providers_Agora extends Hybrid_Provider_Model_OAuth2 {
 		$this->user->profile->lastName = (property_exists($data, 'displayName')) ? $data->displayName : "";
 		$this->user->profile->displayName = (property_exists($data, 'displayName')) ? trim($data->displayName) : "";
 		$this->user->profile->email = (property_exists($data, 'email')) ? trim($data->email) : "";
-
+		$this->user->profile->emailVerified = (property_exists($data, 'email')) ? $data->email : "";
 		return $this->user->profile;
 	}
 
