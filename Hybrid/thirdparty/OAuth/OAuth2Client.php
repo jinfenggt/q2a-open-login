@@ -133,7 +133,7 @@ class OAuth2Client
       $url = $this->api_base_url . $url;
     }
 
-    $parameters[$this->sign_token_name] = $this->access_token;
+    // $parameters[$this->sign_token_name] = $this->access_token;
     $response = null;
 
     switch( $method ){
@@ -232,7 +232,11 @@ class OAuth2Client
 
     if( $type == "POST" ){
       curl_setopt($ch, CURLOPT_POST, 1);
-      if($params) curl_setopt( $ch, CURLOPT_POSTFIELDS, $params );
+      if($params) {
+	      $q = http_build_query($params);
+	      curl_setopt( $ch, CURLOPT_POSTFIELDS, $q );
+      }
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
     }
 
     $response = curl_exec($ch);
